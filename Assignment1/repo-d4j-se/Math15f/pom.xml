@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-parent</artifactId>
+        <version>24</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-math3</artifactId>
+    <version>3.1-SNAPSHOT</version>
+    <name>Commons Math</name>
+
+    <inceptionYear>2003</inceptionYear>
+    <description>The Math project is a library of lightweight, self-contained mathematics and statistics components
+        addressing the most common practical problems not immediately available in the Java programming language or
+        commons-lang.
+    </description>
+
+    <url>http://commons.apache.org/math/</url>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>http://issues.apache.org/jira/browse/MATH</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/math/trunk</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/math/trunk</developerConnection>
+        <url>http://svn.apache.org/viewvc/commons/proper/math/trunk</url>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>people.apache.org</id>
+            <name>Commons Math</name>
+            <url>scp://people.apache.org/www/commons.apache.org/math</url>
+        </site>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <commons.componentid>math3</commons.componentid>
+        <!-- do not use snapshot suffix here -->
+        <commons.release.version>3.0</commons.release.version>
+        <commons.release.desc>(requires Java 1.5+; not compatible with 2.2)</commons.release.desc>
+        <!-- <commons.rc.version>RC1</commons.rc.version> -->
+        <commons.binary.suffix>-bin</commons.binary.suffix>
+
+        <commons.release.2.version>2.2</commons.release.2.version>
+        <!-- override parent name, because 2.2 uses different artifactId -->
+        <commons.release.2.name>commons-math-${commons.release.2.version}</commons.release.2.name>
+        <commons.release.2.desc>(requires Java 1.5+)</commons.release.2.desc>
+        <commons.release.2.binary.suffix></commons.release.2.binary.suffix>
+
+        <commons.jira.id>MATH</commons.jira.id>
+        <commons.jira.pid>12310485</commons.jira.pid>
+        <commons.encoding>UTF-8</commons.encoding>
+        <maven.compile.source>1.5</maven.compile.source>
+        <maven.compile.target>1.5</maven.compile.target>
+        <math.pmd.version>2.7.1</math.pmd.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*TestBinary.java</include>
+                        <include>**/*TestPermutations.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*AbstractTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/src.xml</descriptor>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <version>${commons.clirr.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${math.pmd.version}</version>
+                <configuration>
+                    <targetJdk>${maven.compile.target}</targetJdk>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
