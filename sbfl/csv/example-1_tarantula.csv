@@ -1,0 +1,12 @@
+"file","line","passed","failed","totalpassed","totalfailed","score","rank"
+example.c,5,2,1,4,1,0.6666666666666666,1
+example.c,1,4,1,4,1,0.5,10
+example.c,2,4,1,4,1,0.5,10
+example.c,3,4,1,4,1,0.5,10
+example.c,4,4,1,4,1,0.5,10
+test1.c,12,4,1,4,1,0.5,10
+test1.c,13,4,1,4,1,0.5,10
+test1.c,14,4,1,4,1,0.5,10
+test1.c,15,4,1,4,1,0.5,10
+test1.c,16,4,1,4,1,0.5,10
+example.c,7,2,0,4,1,0.0,11

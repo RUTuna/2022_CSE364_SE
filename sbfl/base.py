@@ -7,8 +7,8 @@ class SBFL:
         self.formula = formula
         self.totalfailed = 0
         self.totalpassed = 0
-        self.line_SBFL = pd.DataFrame(columns=['file','line','passed','failed','totalpassed','totalfailed','score','rank'])
-        self.func_SBFL = pd.DataFrame(columns=['score','rank'])
+        self.line_SBFL = pd.DataFrame(columns=['"file"','"line"','"passed"','"failed"','"totalpassed"','"totalfailed"','"score"','"rank"'])
+        self.func_SBFL = pd.DataFrame(columns=['"score"','"rank"'])
     
     def cal_formula(self, e_p, n_p, e_f, n_f):
         if self.formula == 'Jaccard':
@@ -39,8 +39,8 @@ class SBFL:
             result = [filename, index[2], e_p, e_f, self.totalpassed, self.totalfailed, score, 0] # 결과 생성
             total_results.append(result)
         
-        self.line_SBFL = pd.DataFrame(total_results, columns=['file','line','passed','failed','totalpassed','totalfailed','score', 'rank'])
-        self.line_SBFL = self.line_SBFL.sort_values(by=['score'])
+        self.line_SBFL = pd.DataFrame(total_results, columns=['"file"','"line"','"passed"','"failed"','"totalpassed"','"totalfailed"','"score"','"rank"'])
+        self.line_SBFL = self.line_SBFL.sort_values(by=['"score"'])
 
 
 
@@ -69,16 +69,16 @@ class SBFL:
             df_index = [(file_name, func_name)]
             result = [score, 0, index[2]] # 결과 생성
             if df_index[0] in self.func_SBFL.index: # df 내에 존재
-                if self.func_SBFL.at[df_index[0], 'score'] < score:
+                if self.func_SBFL.at[df_index[0], '"score"'] < score:
                     self.func_SBFL.at[df_index[0]] = result
             else :
-                df = pd.DataFrame([result], index = pd.MultiIndex.from_tuples(df_index, names=['file', 'function']), columns=['score','rank', 'line'])
+                df = pd.DataFrame([result], index = pd.MultiIndex.from_tuples(df_index, names=['"file"', '"function"']), columns=['"score"','"rank"', '"line"'])
                 if self.func_SBFL.empty:
                     self.func_SBFL = df
                 else:
                     self.func_SBFL = self.func_SBFL.append(df)
         
-        self.func_SBFL = self.func_SBFL.sort_values(by=['score'])
+        self.func_SBFL = self.func_SBFL.sort_values(by=['"score"'])
 
 
         # total_results = []
