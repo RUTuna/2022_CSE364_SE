@@ -198,27 +198,27 @@ def get_sbfl_scores_from_frame(cov_df, failing_tests, sbfl):
     rank = len(sbfl.line_SBFL.index)
     curr_score = 0
     for index, row in sbfl.line_SBFL.iterrows():
-        if row['score'] > curr_score:
+        if row['"score"'] > curr_score:
             rank = count
-            curr_score = row['score']
+            curr_score = row['"score"']
         count = count - 1
-        sbfl.line_SBFL.at[index, 'rank'] = rank
+        sbfl.line_SBFL.at[index, '"rank"'] = rank
 
-    sbfl.line_SBFL = sbfl.line_SBFL.sort_values(by=['rank', 'line'])
+    sbfl.line_SBFL = sbfl.line_SBFL.sort_values(by=['"rank"', '"line"'])
 
 
     count = len(sbfl.func_SBFL.index)
     rank = len(sbfl.func_SBFL.index)
     curr_score = 0
     for index, row in sbfl.func_SBFL.iterrows():
-        if row['score'] > curr_score:
+        if row['"score"'] > curr_score:
             rank = count
-            curr_score = row['score']
+            curr_score = row['"score"']
         count = count - 1
-        sbfl.func_SBFL.at[index, 'rank'] = rank
+        sbfl.func_SBFL.at[index, '"rank"'] = rank
 
-    sbfl.func_SBFL = sbfl.func_SBFL.sort_values(by=['rank', 'line'])
-    sbfl.func_SBFL = sbfl.func_SBFL.drop(labels='line', axis=1)
+    sbfl.func_SBFL = sbfl.func_SBFL.sort_values(by=['"rank"', '"line"'])
+    sbfl.func_SBFL = sbfl.func_SBFL.drop(labels='"line"', axis=1)
 
 
     return sbfl

@@ -23,59 +23,22 @@ cov_df = utils.gcov_files_to_frame(gcov_files, only_covered=True)
 print(cov_df)
 
 # Run FL
-result = utils.get_sbfl_scores_from_frame(cov_df, failing_tests=fail_tests,
-                                          sbfl=SBFL('Ochiai'))
+for method in ['Ochiai', 'Tarantula', 'Jaccard']:
+    result = utils.get_sbfl_scores_from_frame(cov_df, failing_tests=fail_tests,
+                                          sbfl=SBFL(method))
 
-line_SBFL = result.line_SBFL
-func_SBFL = result.func_SBFL
-print('Ochiai\n', line_SBFL, '\n', func_SBFL)
+    line_SBFL = result.line_SBFL
+    func_SBFL = result.func_SBFL
+    print(method, '\n', line_SBFL, '\n', func_SBFL)
 
-start_index = 0
-for i in range(4):
-    start_index = gcov_dir['test1'].index('/', start_index)
-    start_index = start_index + 1
+    start_index = 0
+    for i in range(4):
+        start_index = gcov_dir['test1'].index('/', start_index)
+        start_index = start_index + 1
 
-end_index = gcov_dir['test1'].index('/gcov')
-file_name = '/home/workspace/sbfl/csv/' + gcov_dir['test1'][start_index:end_index] + '_' + result.formula
-line_SBFL.to_csv(file_name + '.csv', index=False)
-func_SBFL.to_csv(file_name + '_function.csv')
-
-# -----------------------------------------------------
-
-result = utils.get_sbfl_scores_from_frame(cov_df, failing_tests=fail_tests,
-                                          sbfl=SBFL('Tarantula'))
-
-line_SBFL = result.line_SBFL
-func_SBFL = result.func_SBFL
-print('Tarantula\n', line_SBFL, '\n', func_SBFL)
-
-start_index = 0
-for i in range(4):
-    start_index = gcov_dir['test1'].index('/', start_index)
-    start_index = start_index + 1
-
-end_index = gcov_dir['test1'].index('/gcov')
-file_name = '/home/workspace/sbfl/csv/' + gcov_dir['test1'][start_index:end_index] + '_' + result.formula
-line_SBFL.to_csv(file_name + '.csv', index=False)
-func_SBFL.to_csv(file_name + '_function.csv')
-
-# -----------------------------------------------------
-
-result = utils.get_sbfl_scores_from_frame(cov_df, failing_tests=fail_tests,
-                                          sbfl=SBFL('Jaccard'))
-
-line_SBFL = result.line_SBFL
-func_SBFL = result.func_SBFL
-print('Tarantula\n', line_SBFL, '\n', func_SBFL)
-
-start_index = 0
-for i in range(4):
-    start_index = gcov_dir['test1'].index('/', start_index)
-    start_index = start_index + 1
-
-end_index = gcov_dir['test1'].index('/gcov')
-file_name = '/home/workspace/sbfl/csv/' + gcov_dir['test1'][start_index:end_index] + '_' + result.formula
-line_SBFL.to_csv(file_name + '.csv', index=False)
-func_SBFL.to_csv(file_name + '_function.csv')
+    end_index = gcov_dir['test1'].index('/gcov')
+    file_name = '/home/workspace/sbfl/csv/' + gcov_dir['test1'][start_index:end_index] + '_' + result.formula.lower()
+    line_SBFL.to_csv(file_name + '.csv', index=False, quotechar='!')
+    func_SBFL.to_csv(file_name + '_function.csv', quotechar='!')
 
 # TODO: Save to csv file
