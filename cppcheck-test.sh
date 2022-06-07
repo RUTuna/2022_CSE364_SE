@@ -21,6 +21,9 @@ mkdir $file
 find build/cli/CMakeFiles/cppcheck.dir -type f -name "*.o" -exec gcov -b --preserve-paths  {} \;
 find build/cli/CMakeFiles/cli_objs.dir -type f -name "*.o" -exec gcov -b --preserve-paths  {} \;
 find build/lib/CMakeFiles/lib_objs.dir -type f -name "*.o" -exec gcov -b --preserve-paths  {} \;
-rm -rf *.gcda
+# rm -rf *.gcda
+rm -rf build/cli/CMakeFiles/cppcheck.dir/*.gcda
+rm -rf build/cli/CMakeFiles/cli_objs.dir/*.gcda
+rm -rf build/lib/CMakeFiles/lib_objs.dir/*.gcda
 mv *.gcov $file
 
