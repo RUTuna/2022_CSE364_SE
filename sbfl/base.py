@@ -44,7 +44,7 @@ class SBFL:
 
 
 
-    def cal_line_func(self, cov_df, failing_tests):
+    def cal_func_score(self, cov_df, failing_tests):
         total_results = []
         funcs = {}
         for index, row in cov_df.iterrows():

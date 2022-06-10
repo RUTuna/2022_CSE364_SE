@@ -191,7 +191,7 @@ def get_sbfl_scores_from_frame(cov_df, failing_tests, sbfl):
     sbfl.totalfailed = len(failing_tests)
     sbfl.totalpassed = len(cov_df.columns) - sbfl.totalfailed
     sbfl.cal_line_score(cov_df, failing_tests)
-    sbfl.cal_line_func(cov_df, failing_tests)
+    sbfl.cal_func_score(cov_df, failing_tests)
 
     # TODO: Rank result from SBFL and return it.
     count = len(sbfl.line_SBFL.index)
