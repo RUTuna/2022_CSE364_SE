@@ -18,6 +18,7 @@ class SBFL:
         else:
             return sbfl_formula.Ochiai(e_p, n_p, e_f, n_f)
 
+
     def cal_line_score(self, cov_df, failing_tests):
         total_results = []
         for index, row in cov_df.iterrows():
@@ -27,6 +28,7 @@ class SBFL:
             for fail in failing_tests:
                 if row[fail] : # failing_test 중 커버한 횟수 확인
                     e_f = e_f + 1
+
 
             for covered in row:
                 if covered:
@@ -48,12 +50,12 @@ class SBFL:
         total_results = []
         funcs = {}
         for index, row in cov_df.iterrows():
-            if type(index[1]) is float: # NaN 제거
+            if type(index[1]) is float: # 함수명 NaN 제거
                 continue
             func_name = index[1]
             file_name = index[0][index[0].rfind('/') + 1:]
             funcs[func_name] = file_name # 함수 이름 저장 딕셔너리 key: func_name, value: file_name
-
+            
             e_p = 0
             e_f = 0
 
@@ -61,12 +63,13 @@ class SBFL:
                 if row[fail] : # failing_test 중 커버한 횟수 확인
                     e_f = e_f + 1
 
+
             for covered in row:
                 if covered:
                     e_p = e_p + 1 # 모든 테스트 케이스 중 해당 라인 커버한 횟수
             
             e_p = e_p - e_f # fail 제외해서 pase 만 두게
-        
+
             score = self.cal_formula(e_p, self.totalpassed, e_f, self.totalfailed)
             df_index = [(file_name, func_name)]
             result = [score, 0, index[2]] # 결과 생성
