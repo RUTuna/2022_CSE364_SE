@@ -4,10 +4,10 @@ from base import SBFL
 import test_info
 
 # Set variables
-gcov_dir = test_info.EXAMPLE_TESTS
+gcov_dir = test_info.CPPCHECK_28_TESTS
 # test_info.CPPCHECK_4_TESTS
 # test_info.EXAMPLE_TESTS
-fail_tests = test_info.EXAMPLE_FAIL
+fail_tests = test_info.CPPCHECK_28_FAIL
 # test_info.CPPCHECK_4_FAIL
 # test_info.EXAMPLE_FAIL
 

@@ -48,6 +48,8 @@ class SBFL:
         total_results = []
         funcs = {}
         for index, row in cov_df.iterrows():
+            if type(index[1]) is float: # NaN 제거
+                continue
             func_name = index[1]
             file_name = index[0][index[0].rfind('/') + 1:]
             funcs[func_name] = file_name # 함수 이름 저장 딕셔너리 key: func_name, value: file_name
@@ -80,7 +82,7 @@ class SBFL:
         
         self.func_SBFL = self.func_SBFL.sort_values(by=['"score"'])
 
-
+    # 함수별로 count하는 코드
         # total_results = []
         # funcs = {}
         # e_p = {}
